@@ -48,10 +48,11 @@ def w(cosmo, a):
 
     .. math::
 
-        w(a) = w_0 + w_a (1 - a)
+        CPL w(a) = w_0 + w_a (1 - a)
+        EDE w(a) = -1.0 + (4.0/3.0)*(1.0/(1+(a/a_st)^(eme)))
     """
-    return cosmo.w0 + (1.0 - a) * cosmo.wa  # Equation (6) in Linder (2003)
-
+    #return cosmo.w0 + (1.0 - a) * cosmo.wa  # Equation (6) in Linder (2003)
+    return -1. + 4./(3.*(1+(a/cosmo.a_st)**(cosmo.eme)))
 
 def f_de(cosmo, a):
     r"""Evolution parameter for the Dark Energy density.
@@ -84,11 +85,11 @@ def f_de(cosmo, a):
     in Eq. :eq:`linderParam` :math:`f(a)` becomes:
 
     .. math::
-
-        f(a) = -3 (1 + w_0 + w_a) \ln(a) + 3 w_a (a - 1)
+        CPL f(a) = -3 (1 + w_0 + w_a) \ln(a) + 3 w_a (a - 1)
+        EDE f(a) = a^(-4)*((1.0+(a/a_st)^(eme))/(1.0+(1/a_st)^(eme)))^(4/eme)
     """
-    return -3.0 * (1.0 + cosmo.w0 + cosmo.wa) * np.log(a) + 3.0 * cosmo.wa * (a - 1.0)
-
+    #return -3.0 * (1.0 + cosmo.w0 + cosmo.wa) * np.log(a) + 3.0 * cosmo.wa * (a - 1.0)
+    return a**(-4)*((1.0+(a/cosmo.a_st)**(cosmo.eme))/(1.0+(1/cosmo.a_st)**(cosmo.eme)))**(4.0/cosmo.eme)
 
 def Esqr(cosmo, a):
     r"""Square of the scale factor dependent factor E(a) in the Hubble
