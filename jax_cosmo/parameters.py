@@ -1,7 +1,7 @@
 # This module defines a few default cosmologies
 from functools import partial
 
-from jax_cosmo.core import Cosmology
+from jax_cosmo.core import Cosmology_EDE
 
 # To add new cosmologies, we just set the parameters to some default values using
 # partial
@@ -15,6 +15,6 @@ Planck15 = partial(
     h=0.6774,
     n_s=0.9667,
     sigma8=0.8159,
-    w0=-1.0,
-    wa=0.0,
+    eme=10.0,
+    a_st=0.005,
 )
